@@ -1,0 +1,43 @@
+[
+    {
+        "name": "task", 
+        "key": "id",
+        "indexList": [
+            {
+                "indexName": "nameIndex",
+                "keyPath": "id",
+                "objectParameters": {"unique": false}
+            }
+        ]
+    },
+    {
+        "name": "donetask", 
+        "key": "id",
+        "indexList": [
+            {
+                "indexName": "nameIndex",
+                "keyPath": "id",
+                "objectParameters": {"unique": false}
+            }
+        ]
+    },
+    {
+        "name": "theme",
+        "key": "id"
+    },
+    {
+        "name": "user",
+        "key": "user"
+    },
+    {
+        "name": "tag",
+        "key": "id",
+        "indexList": [
+            {
+                "indexName": "nameIndex",
+                "keyPath": "name",
+                "objectParameters": {"unique": false}
+            }
+        ]
+    }
+]

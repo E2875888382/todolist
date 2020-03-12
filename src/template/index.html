@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1.0,user-scalable=no">
+        <title>todolist</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            !(function(win, doc) {
+                // eslint-disable-next-line require-jsdoc
+                function setFontSize() {
+                    if (doc.body) {
+                        var winWidth = doc.documentElement.clientWidth || doc.body.clientWidth;
+
+                        if (winWidth > 750) {
+                            winWidth = 750;
+                        }
+                        doc.documentElement.style.fontSize = (winWidth / 750) * 100 + 'px';
+                    } else {
+                        doc.addEventListener('DOMContentLoaded', setFontSize);
+                    }
+                }
+                var timer = null;
+
+                win.addEventListener('resize', function() {
+                    clearTimeout(timer);
+                    timer = setTimeout(setFontSize, 300);
+                }, false);
+                win.addEventListener('onorientationchange', function() {
+                    clearTimeout(timer);
+                    timer = setTimeout(setFontSize, 300);
+                }, false);
+                win.addEventListener('pageshow', function(e) {
+                    if (e.persisted) {
+                        clearTimeout(timer);
+                        timer = setTimeout(setFontSize, 300);
+                    }
+                }, false);
+                setFontSize();
+            }(window, document));
+        </script>
+    </body>
+</html>

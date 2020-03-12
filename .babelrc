@@ -1,0 +1,23 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    [
+        "import",
+        {
+            "libraryName": "vant",
+            "libraryDirectory": "es",
+            "style": true
+        },
+        "vant"
+    ],
+    [
+        "import",
+        {
+            "libraryName": "view-design",
+            "libraryDirectory": "src/components"
+        },
+        "iview"
+    ],
+    "@babel/plugin-transform-runtime"
+  ]
+}
