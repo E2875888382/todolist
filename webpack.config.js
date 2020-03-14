@@ -93,12 +93,15 @@ module.exports = {
             },
             favicon: resolve('favicon.ico')
         }),
+        new webpack.DefinePlugin({
+            API_CONFIG: JSON.stringify('http://localhost:8000')
+        })
     ],
     devServer: {
         contentBase: './',
         historyApiFallback: true,
         port: 3000,
         hot: true,
-        host: "172.22.72.27"
+        // host: "172.22.72.27"
     }
 }

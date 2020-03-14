@@ -1,2 +1,4 @@
 import axios from 'axios';
-export default axios;
+export default axios.create({
+    baseURL: API_CONFIG
+});
