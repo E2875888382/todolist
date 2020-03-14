@@ -33,12 +33,16 @@
             </FormItem>
             <FormItem prop="code">
                 <i-input type="text" size="large" v-model.trim="ifo.code">
-                    <Button slot="prepend" @click="sendCode" disabled v-if="cooling">{{coolingNum}}秒后重新发送</Button>
+                    <Button slot="prepend" @click="sendCode" disabled v-if="cooling">
+                        {{coolingNum}}秒后重新发送
+                    </Button>
                     <Button slot="prepend" @click="sendCode" v-else>发送验证码</Button>
                 </i-input>
             </FormItem>
             <FormItem>
-                <Button class="register-btn" @click="handleSubmit" shape="circle" size="large">注册</Button>
+                <Button class="register-btn" @click="handleSubmit" shape="circle" size="large">
+                    注册
+                </Button>
             </FormItem>
         </Form>
     </div>
@@ -49,14 +53,18 @@ import loginApi from '@api/login';
 export default {
     data() {
         const validateUser = (rule, value, callback)=> {
-            if (/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)) {
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+            if (reg.test(value)) {
                 callback();
             } else {
                 callback(new Error('请检查邮箱是否正确'));
             }
         };
         const validatePass = (rule, value, callback)=> {
-            if (/(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{8,10}$/.test(value)) {
+            const reg = /(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{8,10}$/;
+
+            if (reg.test(value)) {
                 callback();
             } else {
                 callback(new Error('请检查密码格式是否正确'));
@@ -146,7 +154,7 @@ export default {
         },
         async register() {
             const toast = this.$toast.loading({
-                duration: 0, // 持续展示 toast
+                duration: 0,
                 forbidClick: true
             });
             const registerRes = await loginApi.register(this.ifo);
@@ -175,6 +183,8 @@ export default {
     height: 100%;
     width: 100%;
     background: #fff;
+    background: url('~@imgs/bg.png') no-repeat;
+    background-size: cover;
     .register-form {
         width: 75%;
         .register-btn {

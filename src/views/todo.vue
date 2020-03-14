@@ -1,24 +1,37 @@
 <template>
   <div class="container">
-    <Input search placeholder="search" v-model="search" @on-search="searchFor"/>
-
+    <Input
+        search
+        placeholder="search"
+        v-model="search"
+        @on-search="searchFor"
+    />
     <section class="tasklist">
         <transition-group name="list">
-            <task 
-                :done="true" 
-                :content="item.title" 
-                :time="item.time" 
-                :id="item.id" 
-                v-for="item in list" 
-                :key="item.id" 
+            <task
+                :done="true"
+                :content="item.title"
+                :time="item.time"
+                :id="item.id"
+                v-for="item in list"
+                :key="item.id"
                 @done="remove"
             />
         </transition-group>
     </section>
-
-    <Button class="btn_add" size="large" icon="md-add" shape="circle"  @click="show = !show"/>
-
-    <van-dialog v-model="show" show-cancel-button @cancel="cancel" @confirm="buildtask">
+    <Button
+        class="btn_add"
+        size="large"
+        icon="md-add"
+        shape="circle"
+        @click="show = !show"
+    />
+    <van-dialog 
+        v-model="show" 
+        show-cancel-button 
+        @cancel="cancel" 
+        @confirm="buildtask"
+    >
         <new-task ref='newtask'/>
     </van-dialog>
   </div>
@@ -76,29 +89,30 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@theme_icon:var(--theme-header-icon);
-@theme_text:var(--theme-header-text);
-@theme_bg:var(--theme-header-bg);
-@theme_search_bg:var(--theme-search-content-bg);
-@theme_search_icon:var(--theme-search-icon);
-@theme_btn_bg:var(--theme-task-bg);
-@theme_btn_shadow:var(--theme-btn-shadow);
+@theme_icon: var(--theme-header-icon);
+@theme_text: var(--theme-header-text);
+@theme_bg: var(--theme-header-bg);
+@theme_search_bg: var(--theme-search-content-bg);
+@theme_search_icon: var(--theme-search-icon);
+@theme_btn_bg: var(--theme-task-bg);
+@theme_btn_shadow: var(--theme-btn-shadow);
 
-.ivu-input-wrapper{
+.ivu-input-wrapper {
     width: 92%;
     margin: 0 auto;
     display: block;
     height: 1rem;
     padding: .18rem 0;
-    /deep/ .ivu-input-with-suffix{
+    /deep/ .ivu-input-with-suffix {
         border-radius: .4rem;
     }
 }
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
     transition: all 0.5s;
 }
-.list-enter, .list-leave-to
-{
+.list-enter,
+.list-leave-to {
     opacity: 0;
     transform: translateX(30px);
 }
@@ -118,7 +132,7 @@ export default {
         bottom: 150px;
         right: 60px;
         padding: 0;
-        box-shadow: 1px 2px 1px  @theme_btn_shadow;
+        box-shadow: 1px 2px 1px @theme_btn_shadow;
     }
 }
 </style>

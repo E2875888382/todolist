@@ -1,27 +1,27 @@
 <template>
-  <div>
-    <Affix>
-        <van-nav-bar @click-left="show = true">
-            <Icon type="md-menu" slot="left" class="left_icon"/>
-            <span slot="title" class="search-title">{{search}}</span>
-            <div @click="showDrawer" slot="right">
-                <Avatar icon="ios-person" v-show="!avatar"/>
-                <Avatar :src="avatar" v-show="avatar"/>
-            </div>
-        </van-nav-bar>
-    </Affix>
-    <Drawer :closable="false" v-model="show" width="70" placement="left">
-        <h3 class="left-drawer__title" slot="header">任务</h3>
-        <popup-left @close="show = false"/>
-    </Drawer>
-    <Drawer :closable="false" v-model="showRightDrawer" width="70">
-        <h3 class="right-drawer__title" slot="header">
-            {{user}}
-            <Icon type="md-settings"/>
-        </h3>
-        <popup-right @close="showRightDrawer = false"/>
-    </Drawer>
-  </div>
+    <div>
+        <Affix>
+            <van-nav-bar @click-left="show = true">
+                <Icon type="md-menu" slot="left" class="left_icon"/>
+                <span slot="title" class="search-title">{{search}}</span>
+                <div @click="showDrawer" slot="right">
+                    <Avatar icon="ios-person" v-show="!avatar"/>
+                    <Avatar :src="avatar" v-show="avatar"/>
+                </div>
+            </van-nav-bar>
+        </Affix>
+        <Drawer :closable="false" v-model="show" width="70" placement="left">
+            <h3 class="left-drawer__title" slot="header">任务</h3>
+            <popup-left @close="show = false"/>
+        </Drawer>
+        <Drawer :closable="false" v-model="showRightDrawer" width="70">
+            <h3 class="right-drawer__title" slot="header">
+                {{user}}
+                <Icon type="md-settings"/>
+            </h3>
+            <popup-right @close="showRightDrawer = false"/>
+        </Drawer>
+    </div>
 </template>
 
 <script>

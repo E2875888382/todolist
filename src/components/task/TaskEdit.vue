@@ -1,7 +1,7 @@
 <template>
     <div>
         <van-cell-group>
-            <van-field v-model="title" label="标题" left-icon="new"></van-field>
+            <van-field v-model="title" label="标题" left-icon="new"/>
             <van-field
                 readonly
                 clickable

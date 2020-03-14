@@ -63,7 +63,6 @@ export default {
                 this.syncTag(tags);
             }
             db.close();
-            // 缓存database对象
             this.saveDatabase(db);
         })();
     }

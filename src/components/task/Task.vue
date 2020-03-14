@@ -124,7 +124,7 @@ export default {
     }
     .task-wrapper__time {
         margin: 0;
-        color:#999;
+        color: #999;
         font-size: 20px;
         line-height: 30px;
         text-indent: 20px;

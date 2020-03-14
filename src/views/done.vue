@@ -29,11 +29,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@theme_bg:var(--theme-header-bg);
-.list-enter-active, .list-leave-active {
+@theme_bg: var(--theme-header-bg);
+.list-enter-active,
+.list-leave-active {
     transition: all 0.5s;
 }
-.list-enter, .list-leave-to {
+.list-enter,
+.list-leave-to {
     opacity: 0;
     transform: translateX(30px);
 }
@@ -42,9 +44,9 @@ export default {
     padding-top: 10px;
     background-color: @theme_bg;
     &::after {
-        content:'';
+        content: '';
         display: block;
-        height:110px;
+        height: 110px;
     }
 }
 </style>

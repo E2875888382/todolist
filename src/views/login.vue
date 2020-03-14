@@ -3,20 +3,20 @@
         <Avatar icon="ios-person" class="login-avatar" size="90" :src="avatar"/>
         <Form class="login-form" ref="formInline" :rules="loginRule" :model="ifo">
             <FormItem prop="user">
-                <Input 
+                <Input
                     class="login-input"
-                    type="text" 
-                    prefix="md-contact" 
-                    size="large" 
+                    type="text"
+                    prefix="md-contact"
+                    size="large"
                     v-model="ifo.user"
                 />
             </FormItem>
             <FormItem prop="password">
-                <Input 
-                    class="login-input" 
-                    type="password" 
-                    prefix="md-lock" 
-                    size="large" 
+                <Input
+                    class="login-input"
+                    type="password"
+                    prefix="md-lock"
+                    size="large"
                     v-model.trim="ifo.password"
                 />
             </FormItem>
@@ -25,7 +25,14 @@
                 <router-link to="/register">新用户</router-link>
             </FormItem>
             <FormItem>
-                <Button class="login-btn" @click="handleSubmit" shape="circle" size="large">登录</Button>
+                <Button
+                    class="login-btn"
+                    @click="handleSubmit"
+                    shape="circle"
+                    size="large"
+                >
+                    登录
+                </Button>
             </FormItem>
         </Form>
     </div>
@@ -45,7 +52,9 @@ export default {
     },
     data() {
         const validateUser = (rule, value, callback)=> {
-            if (/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)) {
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+            if (reg.test(value)) {
                 if (!this.avatar) {
                     this.getAvatar();
                 }
@@ -55,7 +64,9 @@ export default {
             }
         };
         const validatePass = (rule, value, callback)=> {
-            if (/(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{8,10}$/.test(value)) {
+            const reg = /(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{8,10}$/;
+
+            if (reg.test(value)) {
                 callback();
             } else {
                 callback(new Error('密码8-10位数字、字母、特殊符号至少2种'));
@@ -70,15 +81,15 @@ export default {
             },
             loginRule: {
                 user: [
-                    { 
+                    {
                         validator: validateUser,
-                        trigger: 'blur' 
+                        trigger: 'blur'
                     }
                 ],
                 password: [
-                    { 
+                    {
                         validator: validatePass,
-                        trigger: 'blur' 
+                        trigger: 'blur'
                     }
                 ]
             }
@@ -94,7 +105,7 @@ export default {
         },
         async login() {
             const toast = this.$toast.loading({
-                duration: 0, // 持续展示 toast
+                duration: 0,
                 forbidClick: true,
                 onClose: ()=> this.$router.replace({name: 'todo'})
             });
@@ -117,7 +128,8 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    background: #fff;
+    background: url('~@imgs/bg.png') no-repeat;
+    background-size: cover;
     .login-avatar {
         position: absolute;
         top: 18%;

@@ -18,6 +18,7 @@
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-vue": "^6.2.1",
+    "file-loader": "^5.1.0",
     "mini-idb": "^1.0.2",
     "postcss-loader": "^3.0.0",
     "url-loader": "^2.2.0",

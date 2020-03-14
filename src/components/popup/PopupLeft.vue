@@ -150,7 +150,7 @@ export default {
     .subhead {
         font-size: 30px;
         text-indent: 30px;
-        color:#999;
+        color: #999;
     }
     .btn {
         background-color: transparent;
