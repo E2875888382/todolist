@@ -8,14 +8,14 @@ export default {
     },
     async register(registerMsg) {
         if (registerMsg) {
-            const res = await Http.get('register');
+            const res = await Http.post('register', registerMsg);
 
             return res.data;
         }
     },
     async getLogin(loginMsg) {
         if (loginMsg) {
-            const res = await Http.get('login');
+            const res = await Http.post('login', loginMsg);
 
             return res.data;
         }
