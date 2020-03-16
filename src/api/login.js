@@ -17,6 +17,7 @@ export default {
         if (loginMsg) {
             const res = await Http.post('login', loginMsg);
 
+            localStorage.setItem('token', res.data.token);
             return res.data;
         }
     },

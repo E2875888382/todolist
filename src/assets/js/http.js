@@ -6,7 +6,11 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config=> {
-    config.headers.common['token'] = 'userToken';
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        config.headers.common['token'] = token;
+    }
     return config;
 }, error=> Promise.reject(error));
 
