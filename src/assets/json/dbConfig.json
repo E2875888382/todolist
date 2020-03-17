@@ -26,8 +26,12 @@
         "key": "id"
     },
     {
+        "name": "library",
+        "key": "library"
+    },
+    {
         "name": "user",
-        "key": "user"
+        "key": "token"
     },
     {
         "name": "tag",

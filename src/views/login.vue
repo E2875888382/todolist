@@ -40,6 +40,7 @@
 
 <script>
 import loginApi from '@api/login';
+import syncApi from '@api/sync';
 export default {
     props: {
         user: String
@@ -110,7 +111,11 @@ export default {
                 onClose: ()=> this.$router.replace({name: 'todo'})
             });
             const loginRes = await loginApi.getLogin(this.ifo);
+            const libraryList = await syncApi.pullLibraryList();
 
+            if (libraryList.length !== 0) {
+                await this.$store.dispatch('saveLibraryList', libraryList);
+            }
             await this.$store.dispatch('login', loginRes);
             toast.clear();
         },

@@ -1,8 +1,8 @@
 <template>
     <div>
         <List border>
-            <ListItem v-for="item in libList" :key="item.id">
-                <span class="title">{{item.title}}</span>
+            <ListItem v-for="item in libList" :key="item.library">
+                <span class="title">{{item.name}}</span>
                 <section slot="action">
                     <ButtonGroup>
                         <Button type="primary" icon="md-cloud-download" />
@@ -17,28 +17,17 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
     data() {
         return {
-            lib: '1',
-            libList: [
-                {
-                    title: '工作笔记',
-                    id: 1,
-                    content: {}
-                },
-                {
-                    title: '读后感',
-                    id: 2,
-                    content: {}
-                },
-                {
-                    title: '我的散文集',
-                    id: 3,
-                    content: {}
-                }
-            ]
+            lib: '1'
         };
+    },
+    computed: {
+        ...mapState({
+            libList: 'library'
+        })
     },
     methods: {
         logout() {

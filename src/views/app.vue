@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100%">
         <top v-if="show"/>
-        <router-view/>
+        <router-view></router-view>
         <tabbar v-if="show"/>
     </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         ...mapMutations({
+            syncLibrary: 'syncLibrary',
             syncTag: 'syncTag',
             syncTask: 'syncTask',
             syncDoneTask: 'syncDoneTask',
@@ -43,11 +44,13 @@ export default {
             const theme = await db.getAll('theme');
             const tags = await db.getAll('tag');
             const user = await db.getAll('user');
+            const libs = await db.getAll('library');
             const startTheme = themes[1].theme;
 
             // 获取本地持久化的数据，同步到vuex
             this.syncTask(task);
             this.syncDoneTask(donetask);
+            this.syncLibrary(libs);
             if (user.length !== 0) {
                 this.login(user[user.length - 1]);
             }

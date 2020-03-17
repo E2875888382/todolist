@@ -87,5 +87,11 @@ export default {
         await db.removeAll('user');
         db.close();
         commit('logout');
+    },
+    async saveLibraryList({commit, getters: {getDatabase: db}}, list) {
+        commit('syncLibrary', list);
+        await db.open();
+        await db.setBatch('library', list);
+        db.close();
     }
 };

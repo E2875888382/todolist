@@ -23,9 +23,9 @@ export default {
     },
     async getAvatar(user) {
         if (user) {
-            const res = await Http.get('getAvatar');
+            const res = await Http.post('getAvatar', {user: user});
 
-            return res.data.src;
+            return res.data.avatar;
         }
     }
 };

@@ -104,5 +104,8 @@ export default {
     },
     syncTag(state, array) {
         state.tags = array;
+    },
+    syncLibrary(state, array) {
+        state.library = array;
     }
 };

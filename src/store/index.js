@@ -56,7 +56,8 @@ const state = {
         '--theme-task-bg': '#fff',
         '--theme-btn-shadow': '#9e9e9e'
     },
-    db: {}
+    db: {},
+    library: []
 };
 
 export default new Vuex.Store({
