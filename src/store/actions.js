@@ -93,5 +93,11 @@ export default {
         await db.open();
         await db.setBatch('library', list);
         db.close();
+    },
+    async deleteLibrary({commit, getters: {getDatabase: db}}) {
+        commit('deleteLibrary');
+        await db.open();
+        await db.removeAll('library');
+        db.close();
     }
 };

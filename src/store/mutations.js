@@ -107,5 +107,8 @@ export default {
     },
     syncLibrary(state, array) {
         state.library = array;
+    },
+    deleteLibrary(state) {
+        state.library = [];
     }
 };

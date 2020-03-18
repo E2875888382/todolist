@@ -5,19 +5,21 @@
                 <span class="title">{{item.name}}</span>
                 <section slot="action">
                     <ButtonGroup>
-                        <Button type="primary" icon="md-cloud-download" />
-                        <Button type="primary" icon="md-cloud-upload" />
+                        <Button type="primary" icon="md-cloud-download" @click="pull(item.library)"/>
+                        <Button type="primary" icon="md-cloud-upload" @click="push(item.library)"/>
+                        <Button type="primary" icon="md-trash" @click="del(item.library)"/>
                     </ButtonGroup>
                 </section>
             </ListItem>
         </List>
-        <Button icon="md-add" long class="btn"/>
+        <Button icon="md-add" long class="btn" @click="add"/>
         <Button icon="ios-log-out" long class="btn bottom" @click="logout"/>
     </div>
 </template>
 
 <script>
 import {mapState} from 'vuex';
+import syncApi from '@api/sync';
 export default {
     data() {
         return {
@@ -26,13 +28,57 @@ export default {
     },
     computed: {
         ...mapState({
-            libList: 'library'
+            libList: 'library',
+            tags: 'tags',
+            theme: 'theme',
+            tasks: 'task',
+            doneTasks: 'doneTask'
         })
     },
     methods: {
         logout() {
             this.$store.dispatch('logout');
             this.$emit('close');
+        },
+        async pull(library) {
+            const res = await syncApi.pullLibrary({library});
+
+            console.log(res);
+        },
+        async push(library) {
+            const lib = {
+                library: library,
+                tags: this.tags,
+                tasks: this.tasks,
+                doneTasks: this.doneTasks,
+                theme: this.theme
+            };
+            const res = await syncApi.pushLibrary({lib});
+
+            console.log(res);
+        },
+        async add() {
+            const res = await syncApi.newLibrary({
+                update: new Date().toLocaleString(),
+                name: 'test'
+            });
+            const libraryList = await syncApi.pullLibraryList();
+
+            if (libraryList.length !== 0) {
+                await this.$store.dispatch('saveLibraryList', libraryList);
+            }
+            console.log(res);
+        },
+        async del(library) {
+            const res = await syncApi.deleteLibrary({library});
+
+            await this.$store.dispatch('deleteLibrary');
+            const libraryList = await syncApi.pullLibraryList();
+
+            if (libraryList.length !== 0) {
+                await this.$store.dispatch('saveLibraryList', libraryList);
+            }
+            console.log(res);
         }
     }
 };

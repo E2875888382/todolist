@@ -6,8 +6,8 @@ export default {
 
         return res.data;
     },
-    async pullLibrary() {
-        const res = await Http.get('pullLibrary');
+    async pullLibrary(lib) {
+        const res = await Http.post('pullLibrary', lib);
 
         return res.data;
     },
@@ -17,5 +17,15 @@ export default {
 
             return res.data;
         }
+    },
+    async newLibrary(lib) {
+        const res = await Http.post('newLibrary', lib);
+
+        return res.data;
+    },
+    async deleteLibrary(lib) {
+        const res = await Http.post('deleteLibrary', lib);
+
+        return res.data;
     }
 };
