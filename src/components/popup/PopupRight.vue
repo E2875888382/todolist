@@ -12,8 +12,11 @@
                 </section>
             </ListItem>
         </List>
-        <Button icon="md-add" long class="btn" @click="add"/>
+        <Button icon="md-add" long class="btn" @click="showAdd = !showAdd"/>
         <Button icon="ios-log-out" long class="btn bottom" @click="logout"/>
+        <van-dialog v-model="showAdd" show-cancel-button @confirm="add">
+            <van-field v-model="title" label="标题" left-icon="new"/>
+        </van-dialog>
     </div>
 </template>
 
@@ -23,7 +26,9 @@ import syncApi from '@api/sync';
 export default {
     data() {
         return {
-            lib: '1'
+            lib: '1',
+            showAdd: false,
+            title: ''
         };
     },
     computed: {
@@ -58,27 +63,24 @@ export default {
             console.log(res);
         },
         async add() {
-            const res = await syncApi.newLibrary({
+            await syncApi.newLibrary({
                 update: new Date().toLocaleString(),
-                name: 'test'
+                name: this.title || 'new library'
             });
             const libraryList = await syncApi.pullLibraryList();
 
             if (libraryList.length !== 0) {
                 await this.$store.dispatch('saveLibraryList', libraryList);
             }
-            console.log(res);
         },
         async del(library) {
-            const res = await syncApi.deleteLibrary({library});
-
+            await syncApi.deleteLibrary({library});
             await this.$store.dispatch('deleteLibrary');
             const libraryList = await syncApi.pullLibraryList();
 
             if (libraryList.length !== 0) {
                 await this.$store.dispatch('saveLibraryList', libraryList);
             }
-            console.log(res);
         }
     }
 };
@@ -105,6 +107,9 @@ export default {
     background-color: @theme_font;
     border-color: @theme_font;
     color: @theme_bg;
+}
+.ivu-btn-group:not(.ivu-btn-group-vertical) .ivu-btn-primary:not(:first-child):not(:last-child) {
+    border-left-color: @theme_bg;
 }
 .ivu-btn-group:not(.ivu-btn-group-vertical) 
 .ivu-btn-primary+.ivu-btn,
