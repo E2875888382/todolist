@@ -44,6 +44,7 @@ export default {
         logout() {
             this.$store.dispatch('logout');
             this.$emit('close');
+            localStorage.clear();
         },
         async pull(library) {
             const res = await syncApi.pullLibrary({library});
@@ -102,6 +103,7 @@ export default {
 .bottom {
     position: absolute;
     bottom: 0;
+    right: 0;
 }
 .ivu-btn-primary {
     background-color: @theme_font;

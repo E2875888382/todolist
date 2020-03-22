@@ -83,8 +83,10 @@ export default {
         }
     },
     async logout({commit, getters: {getDatabase: db}}) {
+        commit('syncLibrary', []);
         await db.open();
         await db.removeAll('user');
+        await db.removeAll('library');
         db.close();
         commit('logout');
     },

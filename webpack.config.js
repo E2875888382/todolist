@@ -98,7 +98,7 @@ module.exports = {
             favicon: resolve('favicon.ico')
         }),
         new webpack.DefinePlugin({
-            API_CONFIG: JSON.stringify('http://localhost:8000')
+            API_CONFIG: JSON.stringify('/api')
         })
     ],
     devServer: {
@@ -106,6 +106,13 @@ module.exports = {
         historyApiFallback: true,
         port: 3000,
         hot: true,
-        // host: "172.22.72.27"
+        proxy: {
+            '/api': {
+                target: 'https://www.elric.club/',
+                pathRewrite: {"^/api" : ""},
+                changeOrigin: true,
+                secure: false
+            }
+        }
     }
 }
