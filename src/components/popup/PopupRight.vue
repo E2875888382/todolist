@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 import syncApi from '@api/sync';
 export default {
     data() {
@@ -41,6 +41,11 @@ export default {
         })
     },
     methods: {
+        ...mapActions({
+            saveTasks: 'saveTasks',
+            saveDoneTasks: 'saveDoneTasks',
+            saveTags: 'saveTags'
+        }),
         logout() {
             this.$store.dispatch('logout');
             this.$emit('close');
@@ -49,7 +54,26 @@ export default {
         async pull(library) {
             const res = await syncApi.pullLibrary({library});
 
-            console.log(res);
+            if (res) {
+                this.$toast.success('拉取成功');
+            }
+            const {tasks, tags} = res;
+
+            if (tasks.length !== 0) {
+                const todo = tasks.filter(item=> item.done === 0);
+                const done = tasks.filter(item=> item.done === 1);
+
+                todo.forEach(item=> item.id = Number(item.id));
+                done.forEach(item=> item.id = Number(item.id));
+                this.saveTasks(todo);
+                this.saveDoneTasks(done);
+            } else {
+                this.saveTasks([]);
+                this.saveDoneTasks([]);
+            }
+            tags.forEach(item=> item.id = Number(item.id));
+            this.saveTags(tags);
+            this.$emit('close');
         },
         async push(library) {
             const lib = {
@@ -61,7 +85,9 @@ export default {
             };
             const res = await syncApi.pushLibrary({lib});
 
-            console.log(res);
+            if (res) {
+                this.$toast.success('提交成功');
+            }
         },
         async add() {
             await syncApi.newLibrary({

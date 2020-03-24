@@ -93,6 +93,7 @@ export default {
     async saveLibraryList({commit, getters: {getDatabase: db}}, list) {
         commit('syncLibrary', list);
         await db.open();
+        await db.removeAll('library');
         await db.setBatch('library', list);
         db.close();
     },
@@ -100,6 +101,27 @@ export default {
         commit('deleteLibrary');
         await db.open();
         await db.removeAll('library');
+        db.close();
+    },
+    async saveTasks({commit, getters: {getDatabase: db}}, tasks) {
+        commit('syncTask', tasks);
+        await db.open();
+        await db.removeAll('task');
+        await db.setBatch('task', tasks);
+        db.close();
+    },
+    async saveDoneTasks({commit, getters: {getDatabase: db}}, tasks) {
+        commit('syncDoneTask', tasks);
+        await db.open();
+        await db.removeAll('donetask');
+        await db.setBatch('donetask', tasks);
+        db.close();
+    },
+    async saveTags({commit, getters: {getDatabase: db}}, tags) {
+        commit('syncTag', tags);
+        await db.open();
+        await db.removeAll('tag');
+        await db.setBatch('tag', tags);
         db.close();
     }
 };
