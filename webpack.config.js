@@ -108,7 +108,7 @@ module.exports = {
         hot: true,
         proxy: {
             '/api': {
-                target: 'https://www.elric.club/',
+                target: 'https://www.elric.club:8000/',
                 pathRewrite: {"^/api" : ""},
                 changeOrigin: true,
                 secure: false
