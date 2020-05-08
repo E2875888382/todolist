@@ -11,6 +11,7 @@ module.exports = {
     mode:'development',
     entry: resolve('./src/entries/index.js'),
     output: {
+        // publicPath: './', //打正式包时使用
         publicPath: '/',
         filename:'bundle.js',
         path: resolve('dist'),
@@ -99,6 +100,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             API_CONFIG: JSON.stringify('/api')
+            // API_CONFIG: JSON.stringify('https://www.elric.club:8000/') // 打正式包时使用
         })
     ],
     devServer: {
