@@ -6,7 +6,7 @@ import 'view-design/dist/styles/iview.css';
 import '@css/common.css';
 import {IndexDBVuePlugin} from 'mini-idb';
 import {Avatar, Drawer, Button, ButtonGroup, Affix, Icon, List, Input, Form, FormItem} from 'view-design';
-import {Picker, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Popup, Row, Col, Dialog, Field, Toast} from 'vant';
+import {Picker, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Popup, Row, Col, Dialog, Field, Toast, Uploader} from 'vant';
 
 Vue.config.productionTip = false;
 
@@ -36,6 +36,7 @@ vueComponent([
     ['FormItem', FormItem]
 ]);
 vueUse([
+    Uploader,
     Toast,
     IndexDBVuePlugin,
     Tabbar,

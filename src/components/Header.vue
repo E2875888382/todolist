@@ -17,10 +17,13 @@
         <Drawer :closable="false" v-model="showRightDrawer" width="70">
             <h3 class="right-drawer__title" slot="header">
                 {{user}}
-                <Icon type="md-settings"/>
+                <Icon type="md-settings" @click="openpopup"/>
             </h3>
             <popup-right @close="showRightDrawer = false"/>
         </Drawer>
+        <van-popup v-model="showPopup" position="bottom" :style="{ height: '100px' }">
+            <popup-bottom/>
+        </van-popup>
     </div>
 </template>
 
@@ -29,12 +32,14 @@ import {mapGetters, mapState} from 'vuex';
 export default {
     components: {
         'popup-left': ()=> import('@components/popup/popupLeft'),
-        'popup-right': ()=> import('@components/popup/popupRight')
+        'popup-right': ()=> import('@components/popup/popupRight'),
+        'popup-bottom': ()=> import('@components/popup/PopupBottom')
     },
     data() {
         return {
             show: false,
-            showRightDrawer: false
+            showRightDrawer: false,
+            showPopup: false
         };
     },
     computed: {
@@ -53,6 +58,9 @@ export default {
             } else {
                 this.$router.replace({name: 'login'});
             }
+        },
+        openpopup() {
+            this.showPopup = !this.showPopup;
         }
     }
 };
