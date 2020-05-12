@@ -1,8 +1,10 @@
 import Http from '@js/http.js';
 
 export default {
-    async sendCode() {
-        const res = await Http.get('getCode');
+    async sendCode(user) {
+        const res = await Http.get('getCode', {
+            params: user
+        });
 
         return res.data.code;
     },

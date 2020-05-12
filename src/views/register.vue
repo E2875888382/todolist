@@ -132,7 +132,7 @@ export default {
             const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 
             if (reg.test(this.ifo.user)) {
-                this.resCode = await loginApi.sendCode();
+                this.resCode = await loginApi.sendCode({user: this.ifo.user});
                 this.cooling = true;
                 for (let i = 0; i < 120; i++) {
                     setTimeout(()=> this.coolingNum--, i * 1000);
