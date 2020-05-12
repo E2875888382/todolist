@@ -15,7 +15,7 @@
                 :after-read="afterRead"
                 v-model="fileList"
                 :max-count="1"
-                :max-size="512000"
+                :max-size="20480"
                 @oversize="handleoversize"
             />
         </van-dialog>
@@ -65,13 +65,12 @@ export default {
         async setNewAvatar() {
             if (this.fileList[0]) {
                 // 对接接口，上传头像
-                const res = await loginApi.update({
+                await loginApi.update({
                     name: this.user,
                     theme: '',
-                    avatar: 'http://p1.music.126.net/ZHnw_czZAYoOCKfrs0JG8Q==/3408486047337157.jpg?param=130y130'
+                    avatar: this.fileList[0].content
                 });
 
-                console.log(res);
                 // 上传好了刷新数据
                 await this.$store.dispatch('login', Object.assign(this.userIfo, {
                     avatar: this.fileList[0].content
@@ -82,7 +81,7 @@ export default {
             console.log(this.fileList);
         },
         handleoversize() {
-            this.$toast.fail('图片大小不能超过500KB');
+            this.$toast.fail('图片大小不能超过20KB');
         }
     }
 };
