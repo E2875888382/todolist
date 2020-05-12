@@ -27,5 +27,14 @@ export default {
 
             return res.data.avatar;
         }
+    },
+    async update({name, theme, avatar}) {
+        const res = await Http.post('update', {
+            name: name,
+            theme: theme,
+            avatar: avatar
+        });
+
+        return res.data;
     }
 };
